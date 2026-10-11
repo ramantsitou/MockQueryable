@@ -16,7 +16,7 @@ public class MyServiceMoqTests
     [TestCase("AnyFirstName", "AnyExistLastName", "01/20/2012", "Users with DateOfBirth more than limit")]
     [TestCase("ExistFirstName", "AnyExistLastName", "02/20/2012", "User with FirstName already exist")]
     [TestCase("AnyFirstName", "ExistLastName", "01/20/2012", "User already exist")]
-    public void CreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
+    public async Task CreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
     {
         //arrange
         var userRepository = new Mock<IUserRepository>();
@@ -36,7 +36,7 @@ public class MyServiceMoqTests
         var mock = users.BuildMock();
         userRepository.Setup(x => x.GetQueryable()).Returns(mock);
         //act
-        var ex = Assert.ThrowsAsync<ApplicationException>(() =>
+        var ex = await Assert.ThrowsAsync<ApplicationException>(() =>
             service.CreateUserIfNotExist(firstName, lastName, dateOfBirth));
         //assert
         Assert.That(expectedError, Is.EqualTo(ex.Message));
@@ -83,7 +83,7 @@ public class MyServiceMoqTests
     [TestCase("AnyFirstName", "AnyExistLastName", "01/20/2012", "Users with DateOfBirth more than limit")]
     [TestCase("ExistFirstName", "AnyExistLastName", "02/20/2012", "User with FirstName already exist")]
     [TestCase("AnyFirstName", "ExistLastName", "01/20/2012", "User already exist")]
-    public void DbSetCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
+    public async Task DbSetCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
     {
         //arrange
         var users = new List<UserEntity>
@@ -101,7 +101,7 @@ public class MyServiceMoqTests
         var userRepository = new TestDbSetRepository(mock.Object);
         var service = new MyService(userRepository);
         //act
-        var ex = Assert.ThrowsAsync<ApplicationException>(() =>
+        var ex = await Assert.ThrowsAsync<ApplicationException>(() =>
             service.CreateUserIfNotExist(firstName, lastName, dateOfBirth));
         //assert
         Assert.That(expectedError, Is.EqualTo(ex.Message));
@@ -110,7 +110,7 @@ public class MyServiceMoqTests
     [TestCase("AnyFirstName", "AnyExistLastName", "01/20/2012", "Users with DateOfBirth more than limit")]
     [TestCase("ExistFirstName", "AnyExistLastName", "02/20/2012", "User with FirstName already exist")]
     [TestCase("AnyFirstName", "ExistLastName", "01/20/2012", "User already exist")]
-    public void DbSetCreatedFromCollectionCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth,
+    public async Task DbSetCreatedFromCollectionCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth,
         string expectedError)
     {
         //arrange
@@ -129,7 +129,7 @@ public class MyServiceMoqTests
         var userRepository = new TestDbSetRepository(mock.Object);
         var service = new MyService(userRepository);
         //act
-        var ex = Assert.ThrowsAsync<ApplicationException>(() =>
+        var ex = await Assert.ThrowsAsync<ApplicationException>(() =>
             service.CreateUserIfNotExist(firstName, lastName, dateOfBirth));
         //assert
         Assert.That(expectedError, Is.EqualTo(ex.Message));
@@ -243,7 +243,7 @@ public class MyServiceMoqTests
     }
 
     [TestCase]
-    public void GetUsersByFirstName_ExpressionVisitorMissing_ThrowsException()
+    public async Task GetUsersByFirstName_ExpressionVisitorMissing_ThrowsException()
     {
         // arrange
         var users = TestDataHelper.CreateUserList();
@@ -253,7 +253,7 @@ public class MyServiceMoqTests
 
         // act
         var exception =
-            Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByFirstName("naME4"));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByFirstName("naME4"));
 
         // assert
         Assert.That(
@@ -283,7 +283,7 @@ public class MyServiceMoqTests
     }
 
     [TestCase]
-    public void GetUsersByLastName_ExpressionVisitorMissing_ThrowsException()
+    public async Task GetUsersByLastName_ExpressionVisitorMissing_ThrowsException()
     {
         // arrange
         var users = TestDataHelper.CreateUserList();
@@ -292,7 +292,7 @@ public class MyServiceMoqTests
         var userRepository = new TestDbSetRepository(mockDbSet.Object);
 
         // act
-        var exception = Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByLastName("naME4"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByLastName("naME4"));
 
         // assert
         Assert.That(
