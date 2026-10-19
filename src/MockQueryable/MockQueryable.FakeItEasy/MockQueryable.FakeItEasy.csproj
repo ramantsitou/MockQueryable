@@ -14,13 +14,16 @@
 	  <PackageTags>Mock EntityFrameworkCore Queryable mock EF UnitTests EntityFrameworkCore</PackageTags>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReleaseNotes>
-		  Microsoft.EntityFrameworkCore v 10.0.12 - supported
-		  #145:  Microsoft.EntityFrameworkCore.Relational - dependency removed
-		  NSubstitute v 6.2.0 - supported
+		  Bump Microsoft.NET.Test.Sdk from 18.10.0 to 18.10.1  in #159
+		  Bump coverlet.msbuild from 10.0.1 to 10.1.0  in #161
+		  Bump NUnit3TestAdapter from 6.3.0 to 6.3.1 in #163
+		  Bump Microsoft.NET.Test.Sdk from 18.10.1 to 18.11.0  in #165
+		  Bump Moq from 4.20.72 to 4.21.0  in #160
+		  Bump Microsoft.EntityFrameworkCore from 10.0.12 to 10.0.13 in #164
 	  </PackageReleaseNotes>
-	  <Version>10.0.12</Version>
-	  <AssemblyVersion>10.0.0.12</AssemblyVersion>
-	  <FileVersion>10.0.0.12</FileVersion>
+	  <Version>10.0.13</Version>
+	  <AssemblyVersion>10.0.0.13</AssemblyVersion>
+	  <FileVersion>10.0.0.13</FileVersion>
     <Company></Company>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
