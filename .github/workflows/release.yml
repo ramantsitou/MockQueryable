@@ -12,7 +12,7 @@ permissions:
   artifact-metadata: write
 
 env:
-  DOTNET_VERSION: 10.0.x
+  DOTNET_VERSION: 11.0.x
   SOLUTION: src/MockQueryable/*.sln
   CONFIGURATION: Release
 

@@ -19,7 +19,7 @@ public class MyServiceFakeItEasyTests
     [TestCase("AnyFirstName", "AnyExistLastName", "01/20/2012", "Users with DateOfBirth more than limit")]
     [TestCase("ExistFirstName", "AnyExistLastName", "02/20/2012", "User with FirstName already exist")]
     [TestCase("AnyFirstName", "ExistLastName", "01/20/2012", "User already exist")]
-    public void CreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
+    public async Task CreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
     {
         // arrange
         var userRepository = A.Fake<IUserRepository>();
@@ -38,7 +38,7 @@ public class MyServiceFakeItEasyTests
         A.CallTo(() => userRepository.GetQueryable()).Returns(mock);
 
         // act
-        var ex = Assert.ThrowsAsync<ApplicationException>(() =>
+        var ex = await Assert.ThrowsAsync<ApplicationException>(() =>
             service.CreateUserIfNotExist(firstName, lastName, dateOfBirth));
 
         // assert
@@ -88,7 +88,7 @@ public class MyServiceFakeItEasyTests
     [TestCase("AnyFirstName", "AnyExistLastName", "01/20/2012", "Users with DateOfBirth more than limit")]
     [TestCase("ExistFirstName", "AnyExistLastName", "02/20/2012", "User with FirstName already exist")]
     [TestCase("AnyFirstName", "ExistLastName", "01/20/2012", "User already exist")]
-    public void DbSetCreatedFromCollectionCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
+    public async Task DbSetCreatedFromCollectionCreateUserIfNotExist(string firstName, string lastName, DateTime dateOfBirth, string expectedError)
     {
         // arrange
         var users = new List<UserEntity>
@@ -103,7 +103,7 @@ public class MyServiceFakeItEasyTests
         var userRepository = new TestDbSetRepository(mock);
         var service = new MyService(userRepository);
         // act
-        var ex = Assert.ThrowsAsync<ApplicationException>(() =>
+        var ex = await Assert.ThrowsAsync<ApplicationException>(() =>
             service.CreateUserIfNotExist(firstName, lastName, dateOfBirth));
         // assert
         Assert.That(expectedError, Is.EqualTo(ex.Message));
@@ -205,7 +205,7 @@ public class MyServiceFakeItEasyTests
     }
 
     [Test]
-    public void GetUsersByFirstName_ExpressionVisitorMissing_ThrowsException()
+    public async Task GetUsersByFirstName_ExpressionVisitorMissing_ThrowsException()
     {
         // arrange
         var users = TestDataHelper.CreateUserList();
@@ -214,7 +214,7 @@ public class MyServiceFakeItEasyTests
         var userRepository = new TestDbSetRepository(mockDbSet);
 
         // act
-        var exception = Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByFirstName("naME"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByFirstName("naME"));
 
         // assert
         Assert.That(
@@ -242,7 +242,7 @@ public class MyServiceFakeItEasyTests
     }
 
     [Test]
-    public void GetUsersByLastName_ExpressionVisitorMissing_ThrowsException()
+    public async Task GetUsersByLastName_ExpressionVisitorMissing_ThrowsException()
     {
         // arrange
         var users = TestDataHelper.CreateUserList();
@@ -251,7 +251,7 @@ public class MyServiceFakeItEasyTests
         var userRepository = new TestDbSetRepository(mockDbSet);
 
         // act
-        var exception = Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByLastName("naME4"));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => userRepository.GetUsersByLastName("naME4"));
 
         // assert
         Assert.That(

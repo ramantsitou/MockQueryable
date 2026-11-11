@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFramework>net11.0</TargetFramework>
 		<PackageId>MockQueryable.EntityFrameworkCore</PackageId>
 		<Authors>Roman Titov</Authors>
 		<Description>
@@ -13,17 +13,10 @@
 		<RepositoryUrl>https://github.com/romantitov/MockQueryable</RepositoryUrl>
 		<PackageTags>Mock EntityFrameworkCore Queryable mock EF UnitTests EntityFrameworkCore</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReleaseNotes>
-			Bump Microsoft.NET.Test.Sdk from 18.10.0 to 18.10.1  in #159
-			Bump coverlet.msbuild from 10.0.1 to 10.1.0  in #161
-			Bump NUnit3TestAdapter from 6.3.0 to 6.3.1 in #163
-			Bump Microsoft.NET.Test.Sdk from 18.10.1 to 18.11.0  in #165
-			Bump Moq from 4.20.72 to 4.21.0  in #160
-			Bump Microsoft.EntityFrameworkCore from 10.0.12 to 10.0.13 in #164
-		</PackageReleaseNotes>
-		<Version>10.0.13</Version>
-		<AssemblyVersion>10.0.0.13</AssemblyVersion>
-		<FileVersion>10.0.0.13</FileVersion>
+		<PackageReleaseNotes>Support .NET 11 and Entity Framework Core 11; update dependencies to current stable versions.</PackageReleaseNotes>
+		<Version>11.0.0</Version>
+		<AssemblyVersion>11.0.0.0</AssemblyVersion>
+		<FileVersion>11.0.0.0</FileVersion>
 		<Company></Company>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -49,7 +42,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="11.0.0" />
 	</ItemGroup>
 
   <ItemGroup>

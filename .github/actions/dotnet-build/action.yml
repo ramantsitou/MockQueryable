@@ -3,7 +3,7 @@ description: Composite .NET build action
 
 inputs:
   dotnet-version:
-    default: '10.0.x'
+    default: '11.0.x'
     required: false
     description: '.NET version'
 
